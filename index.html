@@ -325,16 +325,16 @@
 
   /* ---------- Mobile drawer ---------- */
   .drawer{
-    position:fixed;inset:0;z-index:150;visibility:hidden;overflow:hidden;
+    position:fixed;inset:0;z-index:150;overflow:hidden;pointer-events:none;
   }
-  .drawer[aria-hidden="false"]{visibility:visible}
+  .drawer[aria-hidden="false"]{pointer-events:auto}
   .drawer-overlay{position:absolute;inset:0;background:rgba(14,29,56,.5);opacity:0;transition:opacity var(--dur) var(--ease)}
   .drawer[aria-hidden="false"] .drawer-overlay{opacity:1}
   .drawer-panel{
     position:absolute;top:0;right:0;height:100%;width:min(88vw,360px);background:#fff;
     box-shadow:var(--shadow-md);padding:1.2rem;overflow-y:auto;
     transform:translateX(100%);transition:transform var(--dur) var(--ease);
-    display:flex;flex-direction:column;
+    display:flex;flex-direction:column;will-change:transform;
   }
   .drawer[aria-hidden="false"] .drawer-panel{transform:translateX(0)}
   .drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
@@ -418,7 +418,7 @@
 </header>
 
 <!-- ============ MOBILE DRAWER ============ -->
-<div class="drawer" id="mobile-drawer" aria-hidden="true">
+<div class="drawer" id="mobile-drawer" aria-hidden="true" inert>
   <div class="drawer-overlay" data-close></div>
   <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
     <div class="drawer-head">
@@ -905,6 +905,7 @@
     var lastFocus = null;
     function open(){
       lastFocus = document.activeElement;
+      drawer.removeAttribute('inert');
       drawer.setAttribute('aria-hidden','false');
       openBtn.setAttribute('aria-expanded','true');
       document.body.style.overflow = 'hidden';
@@ -918,6 +919,8 @@
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
       if(lastFocus) lastFocus.focus();
+      // wait for the slide-out to finish before removing from the a11y/tab tree
+      setTimeout(function(){ if(drawer.getAttribute('aria-hidden')==='true') drawer.setAttribute('inert',''); }, 240);
     }
     function onKey(e){
       if(e.key === 'Escape'){ close(); return; }
