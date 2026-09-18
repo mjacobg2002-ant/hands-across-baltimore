@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#14284b" />
+<title>Hands Across Baltimore | Outpatient Mental Health Center in Baltimore</title>
+<meta name="description" content="Hands Across Baltimore is an outpatient mental health center providing therapy, psychiatric rehabilitation, substance-use treatment, medication management, and community-based services for children, adolescents, adults, and families in Baltimore, MD." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314284b'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='15' font-weight='700' fill='%23f4b93d' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E" />
+<style>
+  /* ---------- Design tokens ---------- */
+  :root{
+    --navy:#14284b;        /* primary trust color */
+    --navy-800:#1c355f;
+    --blue:#2f6fb0;        /* links / supporting UI */
+    --blue-700:#255a90;
+    --yellow:#f4b93d;      /* selective CTA */
+    --yellow-600:#e0a520;
+    --red:#c0392b;         /* small accent only */
+    --ivory:#fbf9f4;       /* warm background */
+    --gray-50:#f4f5f7;
+    --gray-100:#eceef1;
+    --gray-200:#dfe3e8;
+    --charcoal:#2b2f36;    /* body text */
+    --muted:#5a616b;
+    --white:#ffffff;
+    --ring:#2f6fb0;
+    --shadow-sm:0 1px 2px rgba(20,40,75,.06),0 2px 8px rgba(20,40,75,.06);
+    --shadow-md:0 6px 24px rgba(20,40,75,.10);
+    --radius:14px;
+    --radius-sm:10px;
+    --maxw:1140px;
+    --ease:cubic-bezier(.4,0,.2,1);
+    --dur:220ms;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+    color:var(--charcoal);
+    background:var(--ivory);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{line-height:1.2;color:var(--navy);margin:0 0 .5em;font-weight:700;letter-spacing:-.01em}
+  h1{font-size:clamp(2rem,4.4vw,3.15rem)}
+  h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+  h3{font-size:1.18rem}
+  p{margin:0 0 1rem}
+  a{color:var(--blue-700);text-decoration:none}
+  a:hover{text-decoration:underline}
+  img{max-width:100%;display:block}
+  ul{margin:0;padding:0}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1rem,4vw,2rem)}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;font-weight:700;
+    color:var(--blue-700);margin:0 0 .75rem;display:inline-block;
+  }
+  .section{padding:clamp(3rem,7vw,5.5rem) 0}
+  .lead{font-size:1.12rem;color:var(--muted);max-width:60ch}
+  .center{text-align:center;margin-inline:auto}
+
+  /* ---------- Accessibility helpers ---------- */
+  :focus-visible{outline:3px solid var(--ring);outline-offset:2px;border-radius:6px}
+  .skip-link{
+    position:absolute;left:-999px;top:0;z-index:200;background:var(--navy);color:#fff;
+    padding:.7rem 1.1rem;border-radius:0 0 8px 0;font-weight:600;
+  }
+  .skip-link:focus{left:0}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-weight:600;font-size:1rem;line-height:1;cursor:pointer;
+    padding:.85rem 1.4rem;border-radius:999px;border:2px solid transparent;
+    transition:transform var(--dur) var(--ease),background var(--dur) var(--ease),box-shadow var(--dur) var(--ease),color var(--dur) var(--ease);
+    min-height:48px;text-align:center;
+  }
+  .btn:hover{text-decoration:none}
+  .btn-primary{background:var(--yellow);color:#3a2a05;box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{background:var(--yellow-600);transform:translateY(-2px)}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:var(--navy-800);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:var(--navy);border-color:var(--gray-200)}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue-700);transform:translateY(-2px)}
+  .btn-outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+  .btn-outline-light:hover{background:rgba(255,255,255,.12);transform:translateY(-2px)}
+  .link-arrow{font-weight:600;color:var(--blue-700);display:inline-flex;align-items:center;gap:.35rem}
+  .link-arrow svg{transition:transform var(--dur) var(--ease)}
+  .link-arrow:hover svg{transform:translateX(3px)}
+
+  /* ---------- Utility bar ---------- */
+  .utility{background:var(--navy);color:#dfe6f2;font-size:.86rem}
+  .utility .container{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.4rem;padding-top:.5rem;padding-bottom:.5rem}
+  .utility .u-tag{font-weight:600;color:#fff}
+  .utility a{color:#dfe6f2;display:inline-flex;align-items:center;gap:.4rem}
+  .utility a:hover{color:#fff;text-decoration:none}
+  .utility .u-spacer{margin-left:auto}
+  .utility svg{flex:none}
+
+  /* ---------- Header / nav ---------- */
+  .site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--gray-100)}
+  .nav{display:flex;align-items:center;gap:1rem;min-height:66px}
+  .brand{display:flex;align-items:center;gap:.6rem;flex:none}
+  .brand:hover{text-decoration:none}
+  .brand-mark{width:38px;height:38px;flex:none}
+  .brand-text{display:flex;flex-direction:column;line-height:1.05}
+  .brand-name{font-weight:800;color:var(--navy);font-size:1.02rem;letter-spacing:-.01em}
+  .brand-sub{font-size:.66rem;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);font-weight:600}
+  .nav-menu{display:flex;align-items:center;gap:.25rem;margin-left:1rem}
+  .nav-menu a,.nav-menu button.nav-top{
+    font-weight:600;color:var(--navy);background:none;border:0;font:inherit;font-weight:600;
+    padding:.55rem .7rem;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem;
+  }
+  .nav-menu a:hover,.nav-menu button.nav-top:hover{background:var(--gray-50);color:var(--blue-700);text-decoration:none}
+  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex:none}
+
+  /* Dropdown */
+  .has-dropdown{position:relative}
+  .dropdown{
+    position:absolute;top:calc(100% + 6px);left:0;min-width:250px;background:#fff;
+    border:1px solid var(--gray-100);border-radius:12px;box-shadow:var(--shadow-md);
+    padding:.4rem;opacity:0;visibility:hidden;transform:translateY(6px);
+    transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);
+  }
+  .has-dropdown.open .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+  .dropdown a{display:block;padding:.6rem .8rem;border-radius:8px;color:var(--charcoal);font-weight:600}
+  .dropdown a:hover{background:var(--gray-50);color:var(--blue-700)}
+  .caret{transition:transform var(--dur) var(--ease)}
+  .has-dropdown.open .caret{transform:rotate(180deg)}
+
+  /* Mobile toggle */
+  .menu-toggle{display:none;background:none;border:1px solid var(--gray-200);border-radius:10px;width:46px;height:46px;cursor:pointer;align-items:center;justify-content:center}
+  .menu-toggle svg{color:var(--navy)}
+
+  /* ---------- Hero ---------- */
+  .hero{background:linear-gradient(180deg,#fff 0%,var(--ivory) 100%);padding:clamp(2.4rem,5vw,4.2rem) 0 clamp(3rem,6vw,5rem)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,3.2rem);align-items:center}
+  .hero h1{margin-bottom:.4em}
+  .hero .lead{font-size:1.18rem;max-width:52ch}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0 1rem}
+  .hero-textlink{margin-bottom:1.4rem}
+  .reassure{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;padding-top:1.2rem;border-top:1px solid var(--gray-200)}
+  .reassure li{list-style:none;display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem;color:var(--navy)}
+  .reassure svg{color:var(--blue);flex:none}
+  .hero-media{position:relative}
+  .hero-media img{width:100%;height:100%;max-height:520px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow-md);aspect-ratio:4/3}
+  .hero-badge{
+    position:absolute;left:-10px;bottom:22px;background:#fff;border-radius:14px;padding:.8rem 1rem;
+    box-shadow:var(--shadow-md);display:flex;align-items:center;gap:.65rem;max-width:230px;
+  }
+  .hero-badge .dot{width:38px;height:38px;border-radius:10px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;flex:none}
+  .hero-badge span{font-size:.82rem;line-height:1.35;font-weight:600;color:var(--navy)}
+
+  /* ---------- Service cards ---------- */
+  .cards{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{
+    background:#fff;border:1px solid var(--gray-100);border-radius:var(--radius);padding:1.5rem;
+    box-shadow:var(--shadow-sm);transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
+    display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--gray-200)}
+  .card .icon{width:48px;height:48px;border-radius:12px;background:var(--gray-50);color:var(--blue-700);display:grid;place-items:center;margin-bottom:1rem}
+  .card h3{margin-bottom:.4rem}
+  .card p{color:var(--muted);font-size:.96rem;margin-bottom:1rem}
+  .card .link-arrow{margin-top:auto}
+
+  /* ---------- Audience pathways ---------- */
+  .audiences{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .pathway{
+    position:relative;border-radius:var(--radius);padding:1.5rem;color:#fff;overflow:hidden;
+    min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;
+    box-shadow:var(--shadow-sm);
+  }
+  .pathway.p1{background:linear-gradient(150deg,#1c355f,#14284b)}
+  .pathway.p2{background:linear-gradient(150deg,#2f6fb0,#255a90)}
+  .pathway.p3{background:linear-gradient(150deg,#3f7c53,#2f5f3f)}
+  .pathway.p4{background:linear-gradient(150deg,#b9832a,#8f631d)}
+  .pathway .p-icon{margin-bottom:auto;opacity:.9}
+  .pathway h3{color:#fff;margin:.8rem 0 .25rem}
+  .pathway p{color:rgba(255,255,255,.88);font-size:.92rem;margin:0}
+
+  /* ---------- Split feature ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.4rem);align-items:center}
+  .split.reverse .split-media{order:2}
+  .split-media img{width:100%;border-radius:18px;box-shadow:var(--shadow-md);object-fit:cover;aspect-ratio:5/4}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.4rem}
+  .chip{background:#fff;border:1px solid var(--gray-200);color:var(--navy);border-radius:999px;padding:.4rem .85rem;font-size:.88rem;font-weight:600;list-style:none}
+
+  /* ---------- PRP cards ---------- */
+  .prp-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin:1.6rem 0}
+  .prp-card{background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--blue);border-radius:12px;padding:1.4rem;box-shadow:var(--shadow-sm)}
+  .prp-card h3{margin-bottom:.3rem}
+  .prp-card .age{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue-700)}
+  .prp-card p{color:var(--muted);font-size:.95rem;margin:.4rem 0 0}
+
+  /* ---------- Bands ---------- */
+  .band-navy{background:var(--navy);color:#e9eef6}
+  .band-navy h2,.band-navy h3{color:#fff}
+  .band-navy .eyebrow{color:var(--yellow)}
+  .band-navy .lead{color:rgba(233,238,246,.8)}
+  .band-ivory{background:var(--ivory)}
+  .band-gray{background:var(--gray-50)}
+
+  /* Principles */
+  .principles{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .principle{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:1.4rem}
+  .principle .icon{width:44px;height:44px;border-radius:10px;background:rgba(244,185,61,.16);color:var(--yellow);display:grid;place-items:center;margin-bottom:.9rem}
+  .principle h3{font-size:1.05rem;margin-bottom:.3rem}
+  .principle p{color:rgba(233,238,246,.8);font-size:.92rem;margin:0}
+
+  /* Workshops list */
+  .audience-list{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:1.5rem 0}
+  .audience-list li{list-style:none;display:flex;align-items:center;gap:.65rem;background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:.75rem 1rem;font-weight:600;color:var(--navy)}
+  .audience-list svg{color:var(--blue);flex:none}
+
+  /* Steps */
+  .steps{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:2rem}
+  .step{background:#fff;border:1px solid var(--gray-100);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow-sm)}
+  .step .num{width:40px;height:40px;border-radius:50%;background:var(--navy);color:var(--yellow);font-weight:800;display:grid;place-items:center;margin-bottom:.9rem}
+  .pathways-cta{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+  .cta-box{border-radius:var(--radius);padding:1.6rem;border:1px solid var(--gray-100);background:#fff;box-shadow:var(--shadow-sm)}
+  .cta-box h3{margin-bottom:.5rem}
+  .cta-box p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(1.5rem,4vw,3rem);align-items:start}
+  .contact-list{list-style:none;margin:1.2rem 0}
+  .contact-list li{display:flex;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--gray-100)}
+  .contact-list .ci{width:42px;height:42px;border-radius:10px;background:var(--gray-50);color:var(--blue-700);display:grid;place-items:center;flex:none}
+  .contact-list .lbl{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+  .contact-list .val{font-weight:600;color:var(--navy)}
+  .contact-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.3rem}
+  .map-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-100);box-shadow:var(--shadow-sm);background:#fff}
+  .map-preview{
+    height:230px;position:relative;
+    background:
+      linear-gradient(0deg,rgba(20,40,75,.05),rgba(20,40,75,.05)),
+      repeating-linear-gradient(0deg,#e8ecf1 0 2px,transparent 2px 46px),
+      repeating-linear-gradient(90deg,#e8ecf1 0 2px,transparent 2px 46px),
+      linear-gradient(135deg,#eef2f7,#e2e8f0);
+    display:grid;place-items:center;
+  }
+  .map-pin{background:var(--red);color:#fff;border-radius:50% 50% 50% 0;width:34px;height:34px;transform:rotate(-45deg);display:grid;place-items:center;box-shadow:var(--shadow-md)}
+  .map-pin svg{transform:rotate(45deg)}
+  .map-body{padding:1.1rem 1.2rem}
+  .map-body .val{font-weight:600;color:var(--navy)}
+  .hours{margin-top:1.2rem;background:#fff;border:1px solid var(--gray-100);border-radius:12px;padding:1.1rem 1.2rem}
+  .hours dl{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1rem;margin:0}
+  .hours dt{font-weight:600;color:var(--navy)}
+  .hours dd{margin:0;color:var(--muted);text-align:right}
+
+  .notice{
+    display:flex;gap:.8rem;background:#fff8e8;border:1px solid #f0dca6;border-left:4px solid var(--yellow-600);
+    border-radius:10px;padding:1rem 1.15rem;margin-top:1.4rem;font-size:.92rem;color:#5a4a1e;
+  }
+  .notice svg{color:var(--yellow-600);flex:none;margin-top:2px}
+
+  /* Crisis band */
+  .crisis{background:#3a1414;color:#ffdede}
+  .crisis .container{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.5rem;padding-top:1rem;padding-bottom:1rem}
+  .crisis strong{color:#fff}
+  .crisis a{color:#ffd7d7;font-weight:700}
+  .crisis .c-icon{color:#ff8f8f}
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{background:linear-gradient(150deg,var(--navy-800),var(--navy));color:#fff;text-align:center}
+  .final-cta h2{color:#fff}
+  .final-cta p{color:rgba(255,255,255,.85);max-width:52ch;margin-inline:auto}
+  .final-cta .hero-cta{justify-content:center}
+
+  /* ---------- Footer ---------- */
+  .footer{background:#0e1d38;color:#aab7cc;font-size:.94rem;padding:clamp(2.5rem,5vw,3.5rem) 0 1.5rem}
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2rem;margin-bottom:2rem}
+  .footer h4{color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+  .footer a{color:#aab7cc}
+  .footer a:hover{color:#fff}
+  .footer ul li{list-style:none;margin-bottom:.55rem}
+  .footer .brand-name{color:#fff}
+  .footer .brand-sub{color:#7f8da4}
+  .foot-brand p{max-width:34ch;margin-top:.9rem}
+  .social{display:inline-flex;gap:.6rem;margin-top:1rem}
+  .social a{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.08);display:grid;place-items:center;color:#cdd7e6}
+  .social a:hover{background:rgba(255,255,255,.16)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.3rem;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;font-size:.86rem}
+  .footer-bottom .fb-links{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin-left:auto}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .hero-grid,.split,.contact-grid{grid-template-columns:1fr}
+    .split.reverse .split-media{order:0}
+    .hero-media{max-width:560px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .prp-cards,.pathways-cta{grid-template-columns:1fr}
+    .nav-menu{display:none}
+    .menu-toggle{display:inline-flex}
+    .nav-actions .btn.desktop-only{display:none}
+    .utility .u-hide-sm{display:none}
+  }
+  @media (max-width:560px){
+    .footer-grid{grid-template-columns:1fr}
+    .hero-cta .btn,.contact-btns .btn{width:100%}
+    .footer-bottom .fb-links{margin-left:0}
+  }
+
+  /* ---------- Mobile drawer ---------- */
+  .drawer{
+    position:fixed;inset:0;z-index:150;visibility:hidden;
+  }
+  .drawer[aria-hidden="false"]{visibility:visible}
+  .drawer-overlay{position:absolute;inset:0;background:rgba(14,29,56,.5);opacity:0;transition:opacity var(--dur) var(--ease)}
+  .drawer[aria-hidden="false"] .drawer-overlay{opacity:1}
+  .drawer-panel{
+    position:absolute;top:0;right:0;height:100%;width:min(88vw,360px);background:#fff;
+    box-shadow:var(--shadow-md);padding:1.2rem;overflow-y:auto;
+    transform:translateX(100%);transition:transform var(--dur) var(--ease);
+    display:flex;flex-direction:column;
+  }
+  .drawer[aria-hidden="false"] .drawer-panel{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .drawer-close{background:none;border:1px solid var(--gray-200);border-radius:10px;width:44px;height:44px;display:grid;place-items:center;cursor:pointer;color:var(--navy)}
+  .drawer nav a{display:block;padding:.85rem .6rem;font-weight:600;color:var(--navy);border-bottom:1px solid var(--gray-100)}
+  .drawer nav a:hover{color:var(--blue-700);text-decoration:none}
+  .drawer .sub{padding-left:1.1rem}
+  .drawer .sub a{font-weight:500;font-size:.95rem;color:var(--charcoal)}
+  .drawer .group-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;padding:.9rem .6rem .2rem}
+  .drawer-actions{margin-top:auto;padding-top:1.2rem;display:grid;gap:.6rem}
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .btn:hover,.card:hover,.link-arrow:hover svg{transform:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============ UTILITY BAR ============ -->
+<div class="utility">
+  <div class="container">
+    <span class="u-tag u-hide-sm">Outpatient Mental Health Center in Baltimore</span>
+    <span class="u-spacer"></span>
+    <a href="tel:+14436828820" aria-label="Call (443) 682-8820">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+      Call: (443) 682-8820
+    </a>
+    <a href="sms:+14438277669" class="u-hide-sm" aria-label="Text (443) 827-7669">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.8-.9L3 20l1.3-4.1A8.4 8.4 0 0 1 3.6 8 8.4 8.4 0 0 1 12 3.1 8.4 8.4 0 0 1 21 11.5Z"/></svg>
+      Text: (443) 827-7669
+    </a>
+    <a href="#contact">Referral Forms</a>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Hands Across Baltimore home">
+        <!-- Placeholder wordmark. Replace brand-mark SVG with the official Hands Across Baltimore logo when available. -->
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <rect width="48" height="48" rx="11" fill="#14284b"/>
+          <path d="M15 30c-1.5-2-2.5-3.8-2.5-6.2 0-1.1.9-2 2-2s2 .9 2 2v-3.3c0-1.1.9-2 2-2s2 .9 2 2v-1c0-1.1.9-2 2-2s2 .9 2 2v.8c0-1 .9-1.8 2-1.8s2 .9 2 2v7.5c0 4-2.6 7-6.8 7-2.8 0-4.3-1.2-5.7-3Z" fill="#f4b93d"/>
+          <circle cx="31" cy="16" r="2.4" fill="#2f6fb0"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Hands Across Baltimore</span>
+          <span class="brand-sub">Outpatient Mental Health</span>
+        </span>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li class="has-dropdown">
+          <button class="nav-top" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="services-menu">
+            Services
+            <svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="dropdown" id="services-menu" role="menu">
+            <a role="menuitem" href="#therapy">Therapy</a>
+            <a role="menuitem" href="#prp">Psychiatric Rehabilitation Program</a>
+            <a role="menuitem" href="#substance-use">Substance Use Treatment</a>
+            <a role="menuitem" href="#services">Medication Management</a>
+            <a role="menuitem" href="#workshops">Workshops &amp; Training</a>
+          </div>
+        </li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#contact">Referrals</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-outline desktop-only">Refer a Client</a>
+        <a href="#get-started" class="btn btn-primary">Get Started</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer" id="menu-open">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ MOBILE DRAWER ============ -->
+<div class="drawer" id="mobile-drawer" aria-hidden="true">
+  <div class="drawer-overlay" data-close></div>
+  <div class="drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="drawer-head">
+      <span class="brand-name" style="color:var(--navy)">Menu</span>
+      <button class="drawer-close" type="button" aria-label="Close menu" data-close>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile">
+      <a href="#top" data-close>Home</a>
+      <a href="#about" data-close>About</a>
+      <div class="group-label">Services</div>
+      <div class="sub">
+        <a href="#therapy" data-close>Therapy</a>
+        <a href="#prp" data-close>Psychiatric Rehabilitation Program</a>
+        <a href="#substance-use" data-close>Substance Use Treatment</a>
+        <a href="#services" data-close>Medication Management</a>
+        <a href="#workshops" data-close>Workshops &amp; Training</a>
+      </div>
+      <a href="#community" data-close>Community</a>
+      <a href="#contact" data-close>Referrals</a>
+      <a href="#contact" data-close>Contact</a>
+    </nav>
+    <div class="drawer-actions">
+      <a href="#contact" class="btn btn-outline" data-close>Refer a Client</a>
+      <a href="#get-started" class="btn btn-primary" data-close>Get Started</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Outpatient Mental Health Care in Baltimore</span>
+      <h1>Care that helps people heal, grow, and move forward.</h1>
+      <p class="lead">Hands Across Baltimore provides therapy, psychiatric rehabilitation, substance-use treatment, medication support, and community-based services for children, adolescents, adults, and families.</p>
+      <div class="hero-cta">
+        <a href="#get-started" class="btn btn-primary">Get Started</a>
+        <a href="#services" class="btn btn-navy">Explore Services</a>
+      </div>
+      <p class="hero-textlink"><a href="#contact" class="link-arrow">Refer a client
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <ul class="reassure">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Person-centered care</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Children, adults, and families</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Community-based support</li>
+      </ul>
+    </div>
+    <div class="hero-media">
+      <img src="images/hero.jpg" width="1400" height="1050"
+        alt="A mental-health clinician listens attentively to a young adult client during an outpatient therapy session." />
+      <div class="hero-badge">
+        <span class="dot" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
+        </span>
+        <span>Empowering Minds. Strengthening Communities.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICE OVERVIEW ============ -->
+<section class="section" id="services">
+  <div class="container">
+    <div style="max-width:640px;margin-bottom:2.2rem">
+      <span class="eyebrow">Our Services</span>
+      <h2>Support designed around real life.</h2>
+      <p class="lead">Care that meets people where they are — from the therapy room to the classroom, home, and community.</p>
+    </div>
+    <ul class="cards">
+      <li class="card">
+        <span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2Z"/></svg></span>
+        <h3>Therapy</h3>
+        <p>Individual, group, and family therapy supporting children, adolescents, and adults.</p>
+        <a href="#therapy" class="link-arrow">Learn more <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </li>
+      <li class="card">
+        <span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22a10 10 0 1 0-10-10"/><path d="M12 6v6l4 2"/></svg></span>
+        <h3>Psychiatric Rehabilitation</h3>
+        <p>Practical, community-based support for daily living, emotional wellness, and independence.</p>
+        <a href="#prp" class="link-arrow">Learn more <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </li>
+      <li class="card">
+        <span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></span>
+        <h3>Substance Use Treatment</h3>
+        <p>Compassionate outpatient treatment for substance use and co-occurring mental-health needs.</p>
+        <a href="#substance-use" class="link-arrow">Learn more <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </li>
+      <li class="card">
+        <span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="m10.5 20.5-7-7a5 5 0 0 1 7-7l.5.5.5-.5a5 5 0 0 1 7 7"/><path d="M8 8l4 4"/></svg></span>
+        <h3>Medication Management</h3>
+        <p>Collaborative psychiatric evaluation, medication support, and ongoing monitoring.</p>
+        <a href="#medication" class="link-arrow">Learn more <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </li>
+      <li class="card">
+        <span class="icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        <h3>Workshops &amp; Training</h3>
+        <p>Mental-health education for families, schools, workplaces, faith communities, and organizations.</p>
+        <a href="#workshops" class="link-arrow">Learn more <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHO WE SERVE ============ -->
+<section class="section band-gray" id="community">
+  <div class="container">
+    <div style="max-width:640px;margin-bottom:2.2rem">
+      <span class="eyebrow">Who We Serve</span>
+      <h2>Care for individuals, families, and communities.</h2>
+      <p class="lead">Wherever you are starting from, there is a place for you here.</p>
+    </div>
+    <ul class="audiences">
+      <li class="pathway p1">
+        <svg class="p-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+        <h3>Children &amp; Adolescents</h3>
+        <p>Support for young people navigating emotions, behavior, school, and growing up.</p>
+      </li>
+      <li class="pathway p2">
+        <svg class="p-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg>
+        <h3>Adults</h3>
+        <p>Personalized care for mental health, recovery, and everyday resilience.</p>
+      </li>
+      <li class="pathway p3">
+        <svg class="p-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.6"/><path d="M3 20c0-3.3 2.7-6 6-6 2 0 3.8 1 4.9 2.5"/><path d="M14 20c0-2.5 1.8-4.5 4-4.5"/></svg>
+        <h3>Families &amp; Caregivers</h3>
+        <p>Guidance and coordination to support loved ones and strengthen family life.</p>
+      </li>
+      <li class="pathway p4">
+        <svg class="p-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 21V8l6-4 6 4v13"/><path d="M15 21V11l6 4v6"/><path d="M3 21h18"/></svg>
+        <h3>Community Organizations</h3>
+        <p>Partnership with schools, workplaces, and faith and human-service groups.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THERAPY FEATURE ============ -->
+<section class="section" id="therapy">
+  <div class="container split">
+    <div class="split-media">
+      <img src="images/therapy.jpg" width="1400" height="1050" loading="lazy"
+        alt="A therapist takes notes while a client speaks openly during an individual therapy session in a calm, home-like room." />
+    </div>
+    <div>
+      <span class="eyebrow">Therapy</span>
+      <h2>A safe place to talk, heal, and grow.</h2>
+      <p>Individual, family, and group therapy for children, adolescents, and adults — a supportive space to work through challenges at your own pace.</p>
+      <ul class="chips" aria-label="Common areas of focus">
+        <li class="chip">Anxiety &amp; depression</li>
+        <li class="chip">Trauma &amp; PTSD</li>
+        <li class="chip">Grief &amp; loss</li>
+        <li class="chip">Family conflict</li>
+        <li class="chip">Stress &amp; life transitions</li>
+        <li class="chip">Behavioral challenges in youth</li>
+      </ul>
+      <a href="#get-started" class="btn btn-navy">Explore Therapy Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRP FEATURE ============ -->
+<section class="section band-ivory" id="prp">
+  <div class="container">
+    <div style="max-width:680px">
+      <span class="eyebrow">Psychiatric Rehabilitation Program</span>
+      <h2>Practical support beyond the therapy room.</h2>
+      <p class="lead">Psychiatric rehabilitation helps eligible adults and young people strengthen daily routines, coping strategies, independence, communication, and community connection — building on individual strengths and goals.</p>
+    </div>
+    <div class="prp-cards">
+      <div class="prp-card">
+        <span class="age">Adult PRP</span>
+        <h3>For adults ages 18 and older</h3>
+        <p>Individualized support outside of traditional therapy for adults who may benefit from help with daily living, coping, and community integration.</p>
+      </div>
+      <div class="prp-card">
+        <span class="age">Child &amp; Adolescent PRP</span>
+        <h3>For youth ages 5–17</h3>
+        <p>One-on-one support coordinated where appropriate with families, schools, therapists, and community supports.</p>
+      </div>
+    </div>
+    <a href="#get-started" class="btn btn-navy">Learn About PRP</a>
+  </div>
+</section>
+
+<!-- ============ APPROACH / COMMITMENT ============ -->
+<section class="section band-navy" id="about">
+  <div class="container">
+    <div style="max-width:680px;margin-bottom:2.2rem">
+      <span class="eyebrow">Our Commitment</span>
+      <h2>Care grounded in dignity and partnership.</h2>
+      <p class="lead">We meet each person with respect, listen carefully, and build care around real goals and everyday life.</p>
+    </div>
+    <div class="principles">
+      <div class="principle">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg></span>
+        <h3>Personalized care</h3>
+        <p>Each individual or family receives a plan tailored to their needs and goals.</p>
+      </div>
+      <div class="principle">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg></span>
+        <h3>Inclusive environment</h3>
+        <p>A welcoming space where all individuals and families can feel safe and supported.</p>
+      </div>
+      <div class="principle">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3>Qualified professionals</h3>
+        <p>A team of therapists and psychiatric providers dedicated to compassionate, capable care.</p>
+      </div>
+      <div class="principle">
+        <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg></span>
+        <h3>Community connection</h3>
+        <p>Care that links people to schools, resources, and the wider Baltimore community.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUBSTANCE USE ============ -->
+<section class="section" id="substance-use">
+  <div class="container split reverse">
+    <div class="split-media">
+      <img src="images/community.jpg" width="1400" height="1050" loading="lazy"
+        alt="A family relaxes together at home, sharing a warm and joyful moment." />
+    </div>
+    <div>
+      <span class="eyebrow">Substance Use Treatment</span>
+      <h2>Recovery support without judgment.</h2>
+      <p>Outpatient support that meets people with compassion — including assessments, individual counseling, group services, peer recovery support, harm-reduction education, and coordination for co-occurring mental-health needs.</p>
+      <a href="#get-started" class="btn btn-navy">Explore Substance Use Treatment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEDICATION MANAGEMENT (anchor target) ============ -->
+<section class="section band-gray" id="medication">
+  <div class="container split">
+    <div class="split-media">
+      <img src="images/families.jpg" width="1400" height="1050" loading="lazy"
+        alt="A parent embraces their child at home, sharing a calm and caring moment." />
+    </div>
+    <div>
+      <span class="eyebrow">Medication Management</span>
+      <h2>Thoughtful, collaborative medication support.</h2>
+      <p>Board-certified psychiatric providers offer comprehensive psychiatric evaluations, medication support tailored to individual needs, and regular follow-up to monitor effectiveness — coordinated with therapists, primary care, and PRP counselors.</p>
+      <a href="#get-started" class="btn btn-navy">Ask About Medication Management</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSHOPS / COMMUNITY ENGAGEMENT ============ -->
+<section class="section" id="workshops">
+  <div class="container">
+    <div style="max-width:680px">
+      <span class="eyebrow">Workshops &amp; Community Engagement</span>
+      <h2>Building a stronger mental-health community.</h2>
+      <p class="lead">Customizable mental-health education and training, shaped around the group being served.</p>
+    </div>
+    <ul class="audience-list">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Schools &amp; youth organizations</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Faith communities</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Workplaces</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Families &amp; caregivers</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Healthcare &amp; human-service professionals</li>
+    </ul>
+    <a href="#contact" class="btn btn-primary">Request a Workshop</a>
+  </div>
+</section>
+
+<!-- ============ GETTING STARTED ============ -->
+<section class="section band-ivory" id="get-started">
+  <div class="container">
+    <div style="max-width:680px;margin-bottom:2rem">
+      <span class="eyebrow">Getting Started</span>
+      <h2>A simple path to support.</h2>
+      <p class="lead">Reaching out is the first step. We'll help you understand the options from there.</p>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="num" aria-hidden="true">1</span>
+        <h3>Reach out</h3>
+        <p>Contact the team or submit a referral to let us know how we can help.</p>
+      </li>
+      <li class="step">
+        <span class="num" aria-hidden="true">2</span>
+        <h3>Talk it through</h3>
+        <p>Discuss needs, questions, and the services that may be a good fit.</p>
+      </li>
+      <li class="step">
+        <span class="num" aria-hidden="true">3</span>
+        <h3>Determine next steps</h3>
+        <p>Together, decide on an appropriate next step for care.</p>
+      </li>
+    </ol>
+    <div class="pathways-cta">
+      <div class="cta-box">
+        <h3>I'm looking for care</h3>
+        <p>Connect with our team to ask about services and available options for you or a loved one.</p>
+        <a href="#contact" class="btn btn-primary">Get Started</a>
+      </div>
+      <div class="cta-box">
+        <h3>I'm referring someone</h3>
+        <p>Providers, schools, and organizations can reach out to begin a referral.</p>
+        <a href="#contact" class="btn btn-outline">Refer a Client</a>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem;font-size:.92rem;color:var(--muted)">Reaching out does not guarantee eligibility, acceptance, or immediate availability. Our team will discuss options with you directly.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT & LOCATION ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div style="max-width:680px;margin-bottom:2rem">
+      <span class="eyebrow">Contact &amp; Location</span>
+      <h2>Reach the Hands Across Baltimore team.</h2>
+      <p class="lead">We're here Monday through Saturday to answer questions about services and referrals.</p>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <ul class="contact-list">
+          <li>
+            <span class="ci" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><div class="lbl">Address</div><div class="val">809 E. Baltimore Street, Unit 1B<br>Baltimore, MD 21202-4733</div></div>
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+            <div><div class="lbl">Telephone</div><div class="val"><a href="tel:+14436828820">(443) 682-8820</a></div></div>
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.4 8.4 0 0 1-3.8-.9L3 20l1.3-4.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z"/></svg></span>
+            <div><div class="lbl">Text messages</div><div class="val"><a href="sms:+14438277669">(443) 827-7669</a></div></div>
+          </li>
+          <li>
+            <span class="ci" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <div><div class="lbl">Email</div><div class="val"><a href="mailto:admin@handsacrossbaltimore.com">admin@handsacrossbaltimore.com</a></div></div>
+          </li>
+        </ul>
+        <div class="contact-btns">
+          <a href="tel:+14436828820" class="btn btn-navy">Call Now</a>
+          <a href="mailto:admin@handsacrossbaltimore.com" class="btn btn-outline">Send Email</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=809+E+Baltimore+Street+Unit+1B+Baltimore+MD+21202" target="_blank" rel="noopener" class="btn btn-outline">Get Directions</a>
+        </div>
+        <div class="notice" role="note">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <div>Please don't share private medical details — such as diagnoses or medications — through email, text, or general web forms. These channels are not monitored as emergency services and are not a secure or HIPAA-compliant way to send sensitive health information. Use a formal referral form for clinical information.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="map-card">
+          <div class="map-preview" role="img" aria-label="Map location marker for 809 E. Baltimore Street, Unit 1B, Baltimore, MD 21202-4733">
+            <span class="map-pin" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="4"/></svg></span>
+          </div>
+          <div class="map-body">
+            <div class="val">Hands Across Baltimore</div>
+            <div style="color:var(--muted);font-size:.94rem">809 E. Baltimore Street, Unit 1B, Baltimore, MD 21202-4733</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=809+E+Baltimore+Street+Unit+1B+Baltimore+MD+21202" target="_blank" rel="noopener" class="link-arrow" style="margin-top:.6rem">Open in Google Maps
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="hours">
+          <h3 style="font-size:1rem;margin-bottom:.6rem">Hours of Operation</h3>
+          <dl>
+            <dt>Monday–Saturday</dt><dd>9:00 a.m. – 6:00 p.m.</dd>
+            <dt>Sunday</dt><dd>Closed</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRISIS NOTICE ============ -->
+<div class="crisis" role="note" aria-label="Crisis resources">
+  <div class="container">
+    <svg class="c-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+    <span><strong>In an emergency, call <a href="tel:911">911</a>.</strong> For a mental-health or suicide crisis, call or text <a href="tel:988">988</a> (988 Suicide &amp; Crisis Lifeline).</span>
+    <span style="opacity:.8;font-size:.86rem">This website and our general inbox are not monitored as emergency services.</span>
+  </div>
+</div>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section final-cta">
+  <div class="container">
+    <h2>Take the next step with support.</h2>
+    <p>Connect with Hands Across Baltimore to ask about services, referrals, and available care options.</p>
+    <div class="hero-cta">
+      <a href="#get-started" class="btn btn-primary">Get Started</a>
+      <a href="#contact" class="btn btn-outline-light">Refer a Client</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="foot-brand">
+        <div class="brand" style="gap:.6rem">
+          <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true" width="36" height="36">
+            <rect width="48" height="48" rx="11" fill="#1c355f"/>
+            <path d="M15 30c-1.5-2-2.5-3.8-2.5-6.2 0-1.1.9-2 2-2s2 .9 2 2v-3.3c0-1.1.9-2 2-2s2 .9 2 2v-1c0-1.1.9-2 2-2s2 .9 2 2v.8c0-1 .9-1.8 2-1.8s2 .9 2 2v7.5c0 4-2.6 7-6.8 7-2.8 0-4.3-1.2-5.7-3Z" fill="#f4b93d"/>
+            <circle cx="31" cy="16" r="2.4" fill="#2f6fb0"/>
+          </svg>
+          <span class="brand-text"><span class="brand-name">Hands Across Baltimore</span><span class="brand-sub">Empowering Minds. Strengthening Communities.</span></span>
+        </div>
+        <p>An outpatient mental-health center providing therapy, psychiatric rehabilitation, substance-use treatment, medication management, and community-based services in Baltimore, MD.</p>
+        <div class="social">
+          <a href="https://www.instagram.com/handsacrossbaltimore" target="_blank" rel="noopener" aria-label="Hands Across Baltimore on Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#therapy">Therapy</a></li>
+          <li><a href="#prp">Psychiatric Rehabilitation</a></li>
+          <li><a href="#substance-use">Substance Use Treatment</a></li>
+          <li><a href="#medication">Medication Management</a></li>
+          <li><a href="#workshops">Workshops &amp; Training</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#community">Community</a></li>
+          <li><a href="#contact">Referral Forms</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>809 E. Baltimore Street, Unit 1B<br>Baltimore, MD 21202-4733</li>
+          <li>Phone: <a href="tel:+14436828820">(443) 682-8820</a></li>
+          <li>Text: <a href="sms:+14438277669">(443) 827-7669</a></li>
+          <li><a href="mailto:admin@handsacrossbaltimore.com">admin@handsacrossbaltimore.com</a></li>
+          <li>Mon–Sat: 9:00 a.m.–6:00 p.m.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> Hands Across Baltimore. All rights reserved.</span>
+      <span style="opacity:.85">In an emergency call 911; for a crisis call or text 988.</span>
+      <span class="fb-links">
+        <a href="#contact">Privacy Policy</a>
+        <a href="#contact">Accessibility</a>
+        <a href="https://www.instagram.com/handsacrossbaltimore" target="_blank" rel="noopener">Instagram</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Services dropdown (click + keyboard) ----
+  (function(){
+    var dd = document.querySelector('.has-dropdown');
+    var btn = dd.querySelector('.nav-top');
+    function open(){ dd.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    function close(){ dd.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    function toggle(){ dd.classList.contains('open') ? close() : open(); }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); toggle(); });
+    dd.addEventListener('mouseenter', open);
+    dd.addEventListener('mouseleave', close);
+    document.addEventListener('click', function(e){ if(!dd.contains(e.target)) close(); });
+    dd.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ close(); btn.focus(); } });
+    // Close dropdown when a menu item is chosen
+    dd.querySelectorAll('.dropdown a').forEach(function(a){ a.addEventListener('click', close); });
+  })();
+
+  // ---- Mobile drawer ----
+  (function(){
+    var drawer = document.getElementById('mobile-drawer');
+    var openBtn = document.getElementById('menu-open');
+    var panel = drawer.querySelector('.drawer-panel');
+    var lastFocus = null;
+    function open(){
+      lastFocus = document.activeElement;
+      drawer.setAttribute('aria-hidden','false');
+      openBtn.setAttribute('aria-expanded','true');
+      document.body.style.overflow = 'hidden';
+      var first = panel.querySelector('button, a');
+      if(first) first.focus();
+      document.addEventListener('keydown', onKey);
+    }
+    function close(){
+      drawer.setAttribute('aria-hidden','true');
+      openBtn.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+      if(lastFocus) lastFocus.focus();
+    }
+    function onKey(e){
+      if(e.key === 'Escape'){ close(); return; }
+      if(e.key === 'Tab'){
+        var f = panel.querySelectorAll('button, a[href]');
+        if(!f.length) return;
+        var first = f[0], last = f[f.length-1];
+        if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+    }
+    openBtn.addEventListener('click', open);
+    drawer.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', close); });
+  })();
+</script>
+</body>
+</html>
