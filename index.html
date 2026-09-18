@@ -35,7 +35,7 @@
   }
 
   *,*::before,*::after{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
   body{
     margin:0;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
@@ -45,7 +45,9 @@
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
     overflow-x:hidden;
+    max-width:100%;
   }
+  img,svg{max-width:100%}
   h1,h2,h3,h4{line-height:1.2;color:var(--navy);margin:0 0 .5em;font-weight:700;letter-spacing:-.01em}
   h1{font-size:clamp(2rem,4.4vw,3.15rem)}
   h2{font-size:clamp(1.6rem,3vw,2.3rem)}
@@ -105,10 +107,10 @@
 
   /* ---------- Header / nav ---------- */
   .site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--gray-100)}
-  .nav{display:flex;align-items:center;gap:1rem;min-height:66px}
-  .brand{display:flex;align-items:center;gap:.6rem;flex:none}
+  .nav{display:flex;align-items:center;gap:1rem;min-height:66px;flex-wrap:nowrap}
+  .brand{display:flex;align-items:center;gap:.55rem;flex:0 1 auto;min-width:0}
   .brand:hover{text-decoration:none}
-  .brand-mark{height:42px;width:auto;flex:none;display:block}
+  .brand-mark{height:40px;width:auto;flex:none;display:block}
   .foot-logo{background:#fff;border-radius:12px;padding:.85rem 1.1rem;display:inline-block;margin-bottom:.2rem}
   .foot-logo img{display:block;height:auto;max-width:100%;width:300px}
   .brand-text{display:flex;flex-direction:column;line-height:1.05}
@@ -120,7 +122,7 @@
     padding:.55rem .7rem;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem;
   }
   .nav-menu a:hover,.nav-menu button.nav-top:hover{background:var(--gray-50);color:var(--blue-700);text-decoration:none}
-  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:.6rem;flex:none}
+  .nav-actions{margin-left:auto;display:flex;align-items:center;gap:.55rem;flex:none}
 
   /* Dropdown */
   .has-dropdown{position:relative}
@@ -151,7 +153,8 @@
   .reassure li{list-style:none;display:flex;align-items:center;gap:.5rem;font-weight:600;font-size:.95rem;color:var(--navy)}
   .reassure svg{color:var(--blue);flex:none}
   .hero-media{position:relative}
-  .hero-media img{width:100%;height:100%;max-height:520px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow-md);aspect-ratio:4/3}
+  .hero-frame{aspect-ratio:4/3;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-md)}
+  .hero-frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
   .hero-badge{
     position:absolute;left:-10px;bottom:22px;background:#fff;border-radius:14px;padding:.8rem 1rem;
     box-shadow:var(--shadow-md);display:flex;align-items:center;gap:.65rem;max-width:230px;
@@ -160,8 +163,8 @@
   .hero-badge span{font-size:.82rem;line-height:1.35;font-weight:600;color:var(--navy)}
 
   /* ---------- Service cards ---------- */
-  .cards{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
-  .card{
+  .cards{display:flex;flex-wrap:wrap;justify-content:center;gap:1.1rem}
+  .card{flex:1 1 240px;max-width:340px;
     background:#fff;border:1px solid var(--gray-100);border-radius:var(--radius);padding:1.5rem;
     box-shadow:var(--shadow-sm);transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);
     display:flex;flex-direction:column;
@@ -190,7 +193,9 @@
   /* ---------- Split feature ---------- */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.4rem);align-items:center}
   .split.reverse .split-media{order:2}
-  .split-media img{width:100%;border-radius:18px;box-shadow:var(--shadow-md);object-fit:cover;aspect-ratio:5/4}
+  .split-media{aspect-ratio:4/3;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-md)}
+  .split-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .split-media.focus-lower img{object-position:center 68%}
   .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.4rem}
   .chip{background:#fff;border:1px solid var(--gray-200);color:var(--navy);border-radius:999px;padding:.4rem .85rem;font-size:.88rem;font-weight:600;list-style:none}
 
@@ -236,7 +241,7 @@
   .contact-list li{display:flex;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--gray-100)}
   .contact-list .ci{width:42px;height:42px;border-radius:10px;background:var(--gray-50);color:var(--blue-700);display:grid;place-items:center;flex:none}
   .contact-list .lbl{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
-  .contact-list .val{font-weight:600;color:var(--navy)}
+  .contact-list .val{font-weight:600;color:var(--navy);overflow-wrap:anywhere}
   .contact-btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.3rem}
   .map-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-100);box-shadow:var(--shadow-sm);background:#fff}
   .map-preview{
@@ -277,7 +282,7 @@
   .final-cta .hero-cta{justify-content:center}
 
   /* ---------- Footer ---------- */
-  .footer{background:#0e1d38;color:#aab7cc;font-size:.94rem;padding:clamp(2.5rem,5vw,3.5rem) 0 1.5rem}
+  .footer{background:#0e1d38;color:#aab7cc;font-size:.94rem;padding:clamp(2.5rem,5vw,3.5rem) 0 1.5rem;overflow-wrap:anywhere}
   .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:2rem;margin-bottom:2rem}
   .footer h4{color:#fff;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
   .footer a{color:#aab7cc}
@@ -296,23 +301,31 @@
   @media (max-width:900px){
     .hero-grid,.split,.contact-grid{grid-template-columns:1fr}
     .split.reverse .split-media{order:0}
-    .hero-media{max-width:560px}
-    .footer-grid{grid-template-columns:1fr 1fr}
+    .hero-media{max-width:560px;margin-inline:auto}
+    .footer-grid{grid-template-columns:1.4fr 1fr 1fr}
     .prp-cards,.pathways-cta{grid-template-columns:1fr}
     .nav-menu{display:none}
     .menu-toggle{display:inline-flex}
     .nav-actions .btn.desktop-only{display:none}
     .utility .u-hide-sm{display:none}
+    .brand-sub{display:none}
+    .brand-name{font-size:1rem;white-space:nowrap}
+    .nav-actions .btn.btn-primary{padding:.62rem 1.05rem;min-height:44px;font-size:.94rem}
   }
   @media (max-width:560px){
     .footer-grid{grid-template-columns:1fr}
     .hero-cta .btn,.contact-btns .btn{width:100%}
     .footer-bottom .fb-links{margin-left:0}
+    .brand-text{display:none}          /* phones: show the logo mark only */
+    .brand-mark{height:38px}
+    .hero-badge{left:12px;right:12px;max-width:none}
+    .section{padding:2.5rem 0}
+    h1{font-size:1.95rem}
   }
 
   /* ---------- Mobile drawer ---------- */
   .drawer{
-    position:fixed;inset:0;z-index:150;visibility:hidden;
+    position:fixed;inset:0;z-index:150;visibility:hidden;overflow:hidden;
   }
   .drawer[aria-hidden="false"]{visibility:visible}
   .drawer-overlay{position:absolute;inset:0;background:rgba(14,29,56,.5);opacity:0;transition:opacity var(--dur) var(--ease)}
@@ -459,8 +472,10 @@
       </ul>
     </div>
     <div class="hero-media">
-      <img src="images/hero.jpg" width="1400" height="1050"
-        alt="A mental-health clinician listens attentively to a young adult client during an outpatient therapy session." />
+      <div class="hero-frame">
+        <img src="images/hero.jpg" width="1400" height="1050"
+          alt="A mental-health clinician listens attentively to a young adult client during an outpatient therapy session." />
+      </div>
       <div class="hero-badge">
         <span class="dot" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9Z"/></svg>
