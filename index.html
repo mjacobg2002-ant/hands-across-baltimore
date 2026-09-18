@@ -909,9 +909,15 @@
       drawer.setAttribute('aria-hidden','false');
       openBtn.setAttribute('aria-expanded','true');
       document.body.style.overflow = 'hidden';
-      var first = panel.querySelector('button, a');
-      if(first) first.focus();
       document.addEventListener('keydown', onKey);
+      // Focus AFTER the panel has slid in, and never scroll to reach it —
+      // focusing the off-screen (translated) panel mid-animation makes mobile
+      // browsers scroll sideways to it, which looks like a left-then-right glitch.
+      window.setTimeout(function(){
+        if(drawer.getAttribute('aria-hidden') !== 'false') return;
+        var first = panel.querySelector('button, a');
+        if(first && first.focus) first.focus({preventScroll:true});
+      }, 260);
     }
     function close(){
       drawer.setAttribute('aria-hidden','true');
